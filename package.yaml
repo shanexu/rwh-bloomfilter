@@ -7,8 +7,10 @@ maintainer:          "example@example.com"
 copyright:           "2019 Author name here"
 
 extra-source-files:
-- README.md
-- ChangeLog.md
+  - README.md
+  - ChangeLog.md
+  - src/cbits/lookup3.h
+  - src/cbits/lookup3.c
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -20,14 +22,18 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/githubuser/bloomfilter#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- array
+  - base >= 4.7 && < 5
+  - array
+  - bytestring
 
 library:
   source-dirs: src
   exposed-modules:
     - Lib
+    - BloomFilter
     - BloomFilter.Mutable
+    - BloomFilter.Hash
+    - BloomFilter.Easy
   other-modules:
     - BloomFilter.Internal
 
@@ -36,19 +42,19 @@ executables:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - bloomfilter
+      - bloomfilter
 
 tests:
   bloomfilter-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - bloomfilter
+      - bloomfilter
